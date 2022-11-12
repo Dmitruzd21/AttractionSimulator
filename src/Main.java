@@ -7,13 +7,20 @@ public class Main {
             Person person = queueToAttraction.poll();
             String personName = person.getName();
             String personSurname = person.getSurname();
-            int ticketsNumberOfPerson = person.getNumberOfTickets();
-            if (ticketsNumberOfPerson > 0) {
-                System.out.println( personName + " " + personSurname + " прокатился на аттракционе.");
-                person.setNumberOfTickets(ticketsNumberOfPerson - 1);
+            int ticketsNumberOfPersonBeforeRiding = person.getNumberOfTickets();
+            if (ticketsNumberOfPersonBeforeRiding > 0) {
+                rideTheAttraction(personName, personSurname);
+                person.setNumberOfTickets(ticketsNumberOfPersonBeforeRiding - 1);
+            }
+            int ticketsNumberOfPersonAfterRiding = person.getNumberOfTickets();
+            if (ticketsNumberOfPersonAfterRiding > 0) {
                 queueToAttraction.offer(person);
             }
         }
+    }
+
+    public static void rideTheAttraction(String personName, String personSurname) {
+        System.out.println( personName + " " + personSurname + " прокатился на аттракционе.");
     }
 
     public static List<Person> generateClients() {
